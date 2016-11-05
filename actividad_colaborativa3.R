@@ -8,5 +8,8 @@ library(gsheet)
 
 # Bajamos la hoja de cálculo
 url <- 'https://docs.google.com/spreadsheets/d/1CDWBeqpUTBd1TkmDz_M6UGRWdHgU7LOcoiGRTvIttKA/edit#gid=0'
-a <- gsheet2tbl(url)
+datos <- gsheet2tbl(url)
+
+# Ponemos en minúscula todos los datos
+tolower(datos)
 
