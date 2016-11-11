@@ -30,9 +30,15 @@ datos$Street <- gsub("å","a",datos$Street)
 # Quitamos espacios en blanco
 datos$Street2 <- trimws(datos$Street2)
 
-# Ordenamos Street y Street2
-datos <- datos[order(datos$Area,datos$Street, datos$Street),]
-
 # Rellenamos la columna del Area
-datos$Area <- "Birmingan"
+rellenar_vacios <- function(x, missing=""){
+  rle <- rle(as.character(x))
+  empty <- which(rle$value==missing)
+  rle$values[empty] <- rle$value[empty-1] 
+  inverse.rle(rle)
+}
 
+datos$Area <- rellenar_vacios(datos$Area)
+
+# Ordenamos Street y Street2
+datos <- datos[order(datos$Area,datos$Street, datos$Street2),]
